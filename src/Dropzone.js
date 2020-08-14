@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -58,26 +57,44 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var prop_types_1 = __importDefault(require("prop-types"));
-var Layout_1 = __importDefault(require("./Layout"));
-exports.Layout = Layout_1.default;
-var Input_1 = __importDefault(require("./Input"));
-exports.Input = Input_1.default;
-var Preview_1 = __importDefault(require("./Preview"));
-exports.Preview = Preview_1.default;
-var SubmitButton_1 = __importDefault(require("./SubmitButton"));
-exports.SubmitButton = SubmitButton_1.default;
-var utils_1 = require("./utils");
-exports.formatBytes = utils_1.formatBytes;
-exports.formatDuration = utils_1.formatDuration;
-exports.accepts = utils_1.accepts;
-exports.defaultClassNames = utils_1.defaultClassNames;
-exports.getFilesFromEvent = utils_1.getFilesFromEvent;
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+import 'ts-polyfill';
+import React from 'react';
+import PropTypes from 'prop-types';
+import LayoutDefault from './Layout';
+import InputDefault from './Input';
+import PreviewDefault from './Preview';
+import SubmitButtonDefault from './SubmitButton';
+import { formatBytes, formatDuration, accepts, resolveValue, mergeStyles, defaultClassNames, getFilesFromEvent as defaultGetFilesFromEvent, } from './utils';
 var Dropzone = /** @class */ (function (_super) {
     __extends(Dropzone, _super);
     function Dropzone(props) {
@@ -87,10 +104,10 @@ var Dropzone = /** @class */ (function (_super) {
                 _super.prototype.forceUpdate.call(_this);
         };
         _this.getFilesFromEvent = function () {
-            return _this.props.getFilesFromEvent || utils_1.getFilesFromEvent;
+            return _this.props.getFilesFromEvent || defaultGetFilesFromEvent;
         };
         _this.getDataTransferItemsFromEvent = function () {
-            return _this.props.getDataTransferItemsFromEvent || utils_1.getFilesFromEvent;
+            return _this.props.getDataTransferItemsFromEvent || defaultGetFilesFromEvent;
         };
         _this.handleDragEnter = function (e) { return __awaiter(_this, void 0, void 0, function () {
             var dragged;
@@ -163,7 +180,7 @@ var Dropzone = /** @class */ (function (_super) {
         };
         _this.handleSubmit = function (files) {
             if (_this.props.onSubmit)
-                _this.props.onSubmit(files, _this.files.slice());
+                _this.props.onSubmit(files, __spread(_this.files));
         };
         _this.handleCancel = function (fileWithMeta) {
             if (fileWithMeta.meta.status !== 'uploading')
@@ -221,7 +238,7 @@ var Dropzone = /** @class */ (function (_super) {
                         };
                         // firefox versions prior to 53 return a bogus mime type for file drag events,
                         // so files with that mime type are always accepted
-                        if (file.type !== 'application/x-moz-file' && !utils_1.accepts(file, accept)) {
+                        if (file.type !== 'application/x-moz-file' && !accepts(file, accept)) {
                             fileWithMeta.meta.status = 'rejected_file_type';
                             this.handleChangeStatus(fileWithMeta);
                             return [2 /*return*/];
@@ -348,24 +365,25 @@ var Dropzone = /** @class */ (function (_super) {
             });
         }); };
         _this.uploadFile = function (fileWithMeta) { return __awaiter(_this, void 0, void 0, function () {
-            var getUploadParams, params, e_2, url, _a, method, body, _b, fields, _c, headers, _d, extraMeta, xhr, formData, _i, _e, field, _f, _g, header;
+            var getUploadParams, params, e_2, url, _a, method, body, _b, fields, _c, headers, _d, extraMeta, xhr, formData, _e, _f, field, _g, _h, header;
+            var e_3, _j, e_4, _k;
             var _this = this;
-            return __generator(this, function (_h) {
-                switch (_h.label) {
+            return __generator(this, function (_l) {
+                switch (_l.label) {
                     case 0:
                         getUploadParams = this.props.getUploadParams;
                         if (!getUploadParams)
                             return [2 /*return*/];
                         params = null;
-                        _h.label = 1;
+                        _l.label = 1;
                     case 1:
-                        _h.trys.push([1, 3, , 4]);
+                        _l.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, getUploadParams(fileWithMeta)];
                     case 2:
-                        params = _h.sent();
+                        params = _l.sent();
                         return [3 /*break*/, 4];
                     case 3:
-                        e_2 = _h.sent();
+                        e_2 = _l.sent();
                         console.error('Error Upload Params', e_2.stack);
                         return [3 /*break*/, 4];
                     case 4:
@@ -382,14 +400,32 @@ var Dropzone = /** @class */ (function (_super) {
                         xhr = new XMLHttpRequest();
                         formData = new FormData();
                         xhr.open(method, url, true);
-                        for (_i = 0, _e = Object.keys(fields); _i < _e.length; _i++) {
-                            field = _e[_i];
-                            formData.append(field, fields[field]);
+                        try {
+                            for (_e = __values(Object.keys(fields)), _f = _e.next(); !_f.done; _f = _e.next()) {
+                                field = _f.value;
+                                formData.append(field, fields[field]);
+                            }
+                        }
+                        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                        finally {
+                            try {
+                                if (_f && !_f.done && (_j = _e.return)) _j.call(_e);
+                            }
+                            finally { if (e_3) throw e_3.error; }
                         }
                         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                        for (_f = 0, _g = Object.keys(headers); _f < _g.length; _f++) {
-                            header = _g[_f];
-                            xhr.setRequestHeader(header, headers[header]);
+                        try {
+                            for (_g = __values(Object.keys(headers)), _h = _g.next(); !_h.done; _h = _g.next()) {
+                                header = _h.value;
+                                xhr.setRequestHeader(header, headers[header]);
+                            }
+                        }
+                        catch (e_4_1) { e_4 = { error: e_4_1 }; }
+                        finally {
+                            try {
+                                if (_h && !_h.done && (_k = _g.return)) _k.call(_g);
+                            }
+                            finally { if (e_4) throw e_4.error; }
                         }
                         fileWithMeta.meta = __assign({}, fileWithMeta.meta, extraMeta);
                         // update progress (can be used to show progress indicator)
@@ -439,7 +475,7 @@ var Dropzone = /** @class */ (function (_super) {
         };
         _this.files = [];
         _this.mounted = true;
-        _this.dropzone = react_1.default.createRef();
+        _this.dropzone = React.createRef();
         return _this;
     }
     Dropzone.prototype.componentDidMount = function () {
@@ -452,38 +488,48 @@ var Dropzone = /** @class */ (function (_super) {
             this.handleFiles(initialFiles);
     };
     Dropzone.prototype.componentWillUnmount = function () {
+        var e_5, _a;
         this.mounted = false;
-        for (var _i = 0, _a = this.files; _i < _a.length; _i++) {
-            var fileWithMeta = _a[_i];
-            this.handleCancel(fileWithMeta);
+        try {
+            for (var _b = __values(this.files), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var fileWithMeta = _c.value;
+                this.handleCancel(fileWithMeta);
+            }
+        }
+        catch (e_5_1) { e_5 = { error: e_5_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_5) throw e_5.error; }
         }
     };
     Dropzone.prototype.render = function () {
         var _a = this.props, accept = _a.accept, multiple = _a.multiple, maxFiles = _a.maxFiles, minSizeBytes = _a.minSizeBytes, maxSizeBytes = _a.maxSizeBytes, onSubmit = _a.onSubmit, getUploadParams = _a.getUploadParams, disabled = _a.disabled, canCancel = _a.canCancel, canRemove = _a.canRemove, canRestart = _a.canRestart, inputContent = _a.inputContent, inputWithFilesContent = _a.inputWithFilesContent, submitButtonDisabled = _a.submitButtonDisabled, submitButtonContent = _a.submitButtonContent, classNames = _a.classNames, styles = _a.styles, addClassNames = _a.addClassNames, InputComponent = _a.InputComponent, PreviewComponent = _a.PreviewComponent, SubmitButtonComponent = _a.SubmitButtonComponent, LayoutComponent = _a.LayoutComponent;
         var _b = this.state, active = _b.active, dragged = _b.dragged;
-        var reject = dragged.some(function (file) { return file.type !== 'application/x-moz-file' && !utils_1.accepts(file, accept); });
+        var reject = dragged.some(function (file) { return file.type !== 'application/x-moz-file' && !accepts(file, accept); });
         var extra = { active: active, reject: reject, dragged: dragged, accept: accept, multiple: multiple, minSizeBytes: minSizeBytes, maxSizeBytes: maxSizeBytes, maxFiles: maxFiles };
-        var files = this.files.slice();
-        var dropzoneDisabled = utils_1.resolveValue(disabled, files, extra);
-        var _c = utils_1.mergeStyles(classNames, styles, addClassNames, files, extra), _d = _c.classNames, dropzoneClassName = _d.dropzone, dropzoneActiveClassName = _d.dropzoneActive, dropzoneRejectClassName = _d.dropzoneReject, dropzoneDisabledClassName = _d.dropzoneDisabled, inputClassName = _d.input, inputLabelClassName = _d.inputLabel, inputLabelWithFilesClassName = _d.inputLabelWithFiles, previewClassName = _d.preview, previewImageClassName = _d.previewImage, submitButtonContainerClassName = _d.submitButtonContainer, submitButtonClassName = _d.submitButton, _e = _c.styles, dropzoneStyle = _e.dropzone, dropzoneActiveStyle = _e.dropzoneActive, dropzoneRejectStyle = _e.dropzoneReject, dropzoneDisabledStyle = _e.dropzoneDisabled, inputStyle = _e.input, inputLabelStyle = _e.inputLabel, inputLabelWithFilesStyle = _e.inputLabelWithFiles, previewStyle = _e.preview, previewImageStyle = _e.previewImage, submitButtonContainerStyle = _e.submitButtonContainer, submitButtonStyle = _e.submitButton;
-        var Input = InputComponent || Input_1.default;
-        var Preview = PreviewComponent || Preview_1.default;
-        var SubmitButton = SubmitButtonComponent || SubmitButton_1.default;
-        var Layout = LayoutComponent || Layout_1.default;
+        var files = __spread(this.files);
+        var dropzoneDisabled = resolveValue(disabled, files, extra);
+        var _c = mergeStyles(classNames, styles, addClassNames, files, extra), _d = _c.classNames, dropzoneClassName = _d.dropzone, dropzoneActiveClassName = _d.dropzoneActive, dropzoneRejectClassName = _d.dropzoneReject, dropzoneDisabledClassName = _d.dropzoneDisabled, inputClassName = _d.input, inputLabelClassName = _d.inputLabel, inputLabelWithFilesClassName = _d.inputLabelWithFiles, previewClassName = _d.preview, previewImageClassName = _d.previewImage, submitButtonContainerClassName = _d.submitButtonContainer, submitButtonClassName = _d.submitButton, _e = _c.styles, dropzoneStyle = _e.dropzone, dropzoneActiveStyle = _e.dropzoneActive, dropzoneRejectStyle = _e.dropzoneReject, dropzoneDisabledStyle = _e.dropzoneDisabled, inputStyle = _e.input, inputLabelStyle = _e.inputLabel, inputLabelWithFilesStyle = _e.inputLabelWithFiles, previewStyle = _e.preview, previewImageStyle = _e.previewImage, submitButtonContainerStyle = _e.submitButtonContainer, submitButtonStyle = _e.submitButton;
+        var Input = InputComponent || InputDefault;
+        var Preview = PreviewComponent || PreviewDefault;
+        var SubmitButton = SubmitButtonComponent || SubmitButtonDefault;
+        var Layout = LayoutComponent || LayoutDefault;
         var previews = null;
         if (PreviewComponent !== null) {
             previews = files.map(function (f) {
                 return (
                 //@ts-ignore
-                react_1.default.createElement(Preview, { className: previewClassName, imageClassName: previewImageClassName, style: previewStyle, imageStyle: previewImageStyle, key: f.meta.id, fileWithMeta: f, meta: __assign({}, f.meta), isUpload: Boolean(getUploadParams), canCancel: utils_1.resolveValue(canCancel, files, extra), canRemove: utils_1.resolveValue(canRemove, files, extra), canRestart: utils_1.resolveValue(canRestart, files, extra), files: files, extra: extra }));
+                React.createElement(Preview, { className: previewClassName, imageClassName: previewImageClassName, style: previewStyle, imageStyle: previewImageStyle, key: f.meta.id, fileWithMeta: f, meta: __assign({}, f.meta), isUpload: Boolean(getUploadParams), canCancel: resolveValue(canCancel, files, extra), canRemove: resolveValue(canRemove, files, extra), canRestart: resolveValue(canRestart, files, extra), files: files, extra: extra }));
             });
         }
         var input = InputComponent !== null ? (
         //@ts-ignore
-        react_1.default.createElement(Input, { className: inputClassName, labelClassName: inputLabelClassName, labelWithFilesClassName: inputLabelWithFilesClassName, style: inputStyle, labelStyle: inputLabelStyle, labelWithFilesStyle: inputLabelWithFilesStyle, getFilesFromEvent: this.getFilesFromEvent(), accept: accept, multiple: multiple, disabled: dropzoneDisabled, content: utils_1.resolveValue(inputContent, files, extra), withFilesContent: utils_1.resolveValue(inputWithFilesContent, files, extra), onFiles: this.handleFiles, files: files, extra: extra })) : null;
+        React.createElement(Input, { className: inputClassName, labelClassName: inputLabelClassName, labelWithFilesClassName: inputLabelWithFilesClassName, style: inputStyle, labelStyle: inputLabelStyle, labelWithFilesStyle: inputLabelWithFilesStyle, getFilesFromEvent: this.getFilesFromEvent(), accept: accept, multiple: multiple, disabled: dropzoneDisabled, content: resolveValue(inputContent, files, extra), withFilesContent: resolveValue(inputWithFilesContent, files, extra), onFiles: this.handleFiles, files: files, extra: extra })) : null;
         var submitButton = onSubmit && SubmitButtonComponent !== null ? (
         //@ts-ignore
-        react_1.default.createElement(SubmitButton, { className: submitButtonContainerClassName, buttonClassName: submitButtonClassName, style: submitButtonContainerStyle, buttonStyle: submitButtonStyle, disabled: utils_1.resolveValue(submitButtonDisabled, files, extra), content: utils_1.resolveValue(submitButtonContent, files, extra), onSubmit: this.handleSubmit, files: files, extra: extra })) : null;
+        React.createElement(SubmitButton, { className: submitButtonContainerClassName, buttonClassName: submitButtonClassName, style: submitButtonContainerStyle, buttonStyle: submitButtonStyle, disabled: resolveValue(submitButtonDisabled, files, extra), content: resolveValue(submitButtonContent, files, extra), onSubmit: this.handleSubmit, files: files, extra: extra })) : null;
         var className = dropzoneClassName;
         var style = dropzoneStyle;
         if (dropzoneDisabled) {
@@ -500,7 +546,7 @@ var Dropzone = /** @class */ (function (_super) {
         }
         return (
         //@ts-ignore
-        react_1.default.createElement(Layout, { input: input, previews: previews, submitButton: submitButton, dropzoneProps: {
+        React.createElement(Layout, { input: input, previews: previews, submitButton: submitButton, dropzoneProps: {
                 ref: this.dropzone,
                 className: className,
                 style: style,
@@ -511,7 +557,7 @@ var Dropzone = /** @class */ (function (_super) {
             }, files: files, extra: __assign({}, extra, { onFiles: this.handleFiles, onCancelFile: this.handleCancel, onRemoveFile: this.handleRemove, onRestartFile: this.handleRestart }) }));
     };
     return Dropzone;
-}(react_1.default.Component));
+}(React.Component));
 Dropzone.defaultProps = {
     accept: '*',
     multiple: true,
@@ -533,36 +579,37 @@ Dropzone.defaultProps = {
 };
 // @ts-ignore
 Dropzone.propTypes = {
-    onChangeStatus: prop_types_1.default.func,
-    getUploadParams: prop_types_1.default.func,
-    onSubmit: prop_types_1.default.func,
-    getFilesFromEvent: prop_types_1.default.func,
-    getDataTransferItemsFromEvent: prop_types_1.default.func,
-    accept: prop_types_1.default.string,
-    multiple: prop_types_1.default.bool,
-    minSizeBytes: prop_types_1.default.number.isRequired,
-    maxSizeBytes: prop_types_1.default.number.isRequired,
-    maxFiles: prop_types_1.default.number.isRequired,
-    validate: prop_types_1.default.func,
-    autoUpload: prop_types_1.default.bool,
-    timeout: prop_types_1.default.number,
-    initialFiles: prop_types_1.default.arrayOf(prop_types_1.default.any),
+    onChangeStatus: PropTypes.func,
+    getUploadParams: PropTypes.func,
+    onSubmit: PropTypes.func,
+    getFilesFromEvent: PropTypes.func,
+    getDataTransferItemsFromEvent: PropTypes.func,
+    accept: PropTypes.string,
+    multiple: PropTypes.bool,
+    minSizeBytes: PropTypes.number.isRequired,
+    maxSizeBytes: PropTypes.number.isRequired,
+    maxFiles: PropTypes.number.isRequired,
+    validate: PropTypes.func,
+    autoUpload: PropTypes.bool,
+    timeout: PropTypes.number,
+    initialFiles: PropTypes.arrayOf(PropTypes.any),
     /* component customization */
-    disabled: prop_types_1.default.oneOfType([prop_types_1.default.bool, prop_types_1.default.func]),
-    canCancel: prop_types_1.default.oneOfType([prop_types_1.default.bool, prop_types_1.default.func]),
-    canRemove: prop_types_1.default.oneOfType([prop_types_1.default.bool, prop_types_1.default.func]),
-    canRestart: prop_types_1.default.oneOfType([prop_types_1.default.bool, prop_types_1.default.func]),
-    inputContent: prop_types_1.default.oneOfType([prop_types_1.default.node, prop_types_1.default.func]),
-    inputWithFilesContent: prop_types_1.default.oneOfType([prop_types_1.default.node, prop_types_1.default.func]),
-    submitButtonDisabled: prop_types_1.default.oneOfType([prop_types_1.default.bool, prop_types_1.default.func]),
-    submitButtonContent: prop_types_1.default.oneOfType([prop_types_1.default.node, prop_types_1.default.func]),
-    classNames: prop_types_1.default.object.isRequired,
-    styles: prop_types_1.default.object.isRequired,
-    addClassNames: prop_types_1.default.object.isRequired,
+    disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    canCancel: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    canRemove: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    canRestart: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    inputContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    inputWithFilesContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    submitButtonDisabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    submitButtonContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    classNames: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired,
+    addClassNames: PropTypes.object.isRequired,
     /* component injection */
-    InputComponent: prop_types_1.default.func,
-    PreviewComponent: prop_types_1.default.func,
-    SubmitButtonComponent: prop_types_1.default.func,
-    LayoutComponent: prop_types_1.default.func,
+    InputComponent: PropTypes.func,
+    PreviewComponent: PropTypes.func,
+    SubmitButtonComponent: PropTypes.func,
+    LayoutComponent: PropTypes.func,
 };
-exports.default = Dropzone;
+export default Dropzone;
+export { LayoutDefault as Layout, InputDefault as Input, PreviewDefault as Preview, SubmitButtonDefault as SubmitButton, formatBytes, formatDuration, accepts, defaultClassNames, defaultGetFilesFromEvent as getFilesFromEvent, };

@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES5",
+    "module": "es2015",
     "esModuleInterop": true,
     "jsx": "react",
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strict": true
+    "strict": true,
+    "downlevelIteration": true
   },
   "include": ["src/*.tsx", "src/*.ts"],
   "exclude": ["node_modules"]

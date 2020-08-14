@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -10,8 +9,37 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatBytes = function (b) {
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
+var __values = (this && this.__values) || function (o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+};
+export var formatBytes = function (b) {
     var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     var l = 0;
     var n = b;
@@ -21,7 +49,7 @@ exports.formatBytes = function (b) {
     }
     return "" + n.toFixed(n >= 10 || l < 1 ? 0 : 1) + units[l];
 };
-exports.formatDuration = function (seconds) {
+export var formatDuration = function (seconds) {
     var date = new Date(0);
     date.setSeconds(seconds);
     var dateString = date.toISOString().slice(11, 19);
@@ -33,7 +61,7 @@ exports.formatDuration = function (seconds) {
 // returns true if file.name is empty and accept string is something like ".csv",
 // because file comes from dataTransferItem for drag events, and
 // dataTransferItem.name is always empty
-exports.accepts = function (file, accept) {
+export var accepts = function (file, accept) {
     if (!accept || accept === '*')
         return true;
     var mimeType = file.type || '';
@@ -52,16 +80,16 @@ exports.accepts = function (file, accept) {
         return mimeType === type;
     });
 };
-exports.resolveValue = function (value) {
+export var resolveValue = function (value) {
     var args = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
     }
     if (typeof value === 'function')
-        return value.apply(void 0, args);
+        return value.apply(void 0, __spread(args));
     return value;
 };
-exports.defaultClassNames = {
+export var defaultClassNames = {
     dropzone: 'dzu-dropzone',
     dropzoneActive: 'dzu-dropzoneActive',
     dropzoneReject: 'dzu-dropzoneActive',
@@ -74,28 +102,56 @@ exports.defaultClassNames = {
     submitButtonContainer: 'dzu-submitButtonContainer',
     submitButton: 'dzu-submitButton',
 };
-exports.mergeStyles = function (classNames, styles, addClassNames) {
+export var mergeStyles = function (classNames, styles, addClassNames) {
+    var e_1, _a, e_2, _b, e_3, _c;
     var args = [];
     for (var _i = 3; _i < arguments.length; _i++) {
         args[_i - 3] = arguments[_i];
     }
-    var resolvedClassNames = __assign({}, exports.defaultClassNames);
+    var resolvedClassNames = __assign({}, defaultClassNames);
     var resolvedStyles = __assign({}, styles);
-    for (var _a = 0, _b = Object.entries(classNames); _a < _b.length; _a++) {
-        var _c = _b[_a], key = _c[0], value = _c[1];
-        resolvedClassNames[key] = exports.resolveValue.apply(void 0, [value].concat(args));
+    try {
+        for (var _d = __values(Object.entries(classNames)), _e = _d.next(); !_e.done; _e = _d.next()) {
+            var _f = __read(_e.value, 2), key = _f[0], value = _f[1];
+            resolvedClassNames[key] = resolveValue.apply(void 0, __spread([value], args));
+        }
     }
-    for (var _d = 0, _e = Object.entries(addClassNames); _d < _e.length; _d++) {
-        var _f = _e[_d], key = _f[0], value = _f[1];
-        resolvedClassNames[key] = resolvedClassNames[key] + " " + exports.resolveValue.apply(void 0, [value].concat(args));
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (_e && !_e.done && (_a = _d.return)) _a.call(_d);
+        }
+        finally { if (e_1) throw e_1.error; }
     }
-    for (var _g = 0, _h = Object.entries(styles); _g < _h.length; _g++) {
-        var _j = _h[_g], key = _j[0], value = _j[1];
-        resolvedStyles[key] = exports.resolveValue.apply(void 0, [value].concat(args));
+    try {
+        for (var _g = __values(Object.entries(addClassNames)), _h = _g.next(); !_h.done; _h = _g.next()) {
+            var _j = __read(_h.value, 2), key = _j[0], value = _j[1];
+            resolvedClassNames[key] = resolvedClassNames[key] + " " + resolveValue.apply(void 0, __spread([value], args));
+        }
+    }
+    catch (e_2_1) { e_2 = { error: e_2_1 }; }
+    finally {
+        try {
+            if (_h && !_h.done && (_b = _g.return)) _b.call(_g);
+        }
+        finally { if (e_2) throw e_2.error; }
+    }
+    try {
+        for (var _k = __values(Object.entries(styles)), _l = _k.next(); !_l.done; _l = _k.next()) {
+            var _m = __read(_l.value, 2), key = _m[0], value = _m[1];
+            resolvedStyles[key] = resolveValue.apply(void 0, __spread([value], args));
+        }
+    }
+    catch (e_3_1) { e_3 = { error: e_3_1 }; }
+    finally {
+        try {
+            if (_l && !_l.done && (_c = _k.return)) _c.call(_k);
+        }
+        finally { if (e_3) throw e_3.error; }
     }
     return { classNames: resolvedClassNames, styles: resolvedStyles };
 };
-exports.getFilesFromEvent = function (event) {
+export var getFilesFromEvent = function (event) {
     var items = null;
     if ('dataTransfer' in event) {
         var dt = event.dataTransfer;

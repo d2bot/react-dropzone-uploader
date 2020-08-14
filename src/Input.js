@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -34,18 +33,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _this = this;
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var prop_types_1 = __importDefault(require("prop-types"));
+import React from 'react';
+import PropTypes from 'prop-types';
 var Input = function (props) {
     var className = props.className, labelClassName = props.labelClassName, labelWithFilesClassName = props.labelWithFilesClassName, style = props.style, labelStyle = props.labelStyle, labelWithFilesStyle = props.labelWithFilesStyle, getFilesFromEvent = props.getFilesFromEvent, accept = props.accept, multiple = props.multiple, disabled = props.disabled, content = props.content, withFilesContent = props.withFilesContent, onFiles = props.onFiles, files = props.files;
-    return (react_1.default.createElement("label", { className: files.length > 0 ? labelWithFilesClassName : labelClassName, style: files.length > 0 ? labelWithFilesStyle : labelStyle },
+    return (React.createElement("label", { className: files.length > 0 ? labelWithFilesClassName : labelClassName, style: files.length > 0 ? labelWithFilesStyle : labelStyle },
         files.length > 0 ? withFilesContent : content,
-        react_1.default.createElement("input", { className: className, style: style, type: "file", accept: accept, multiple: multiple, disabled: disabled, onChange: function (e) { return __awaiter(_this, void 0, void 0, function () {
+        React.createElement("input", { className: className, style: style, type: "file", accept: accept, multiple: multiple, disabled: disabled, onChange: function (e) { return __awaiter(_this, void 0, void 0, function () {
                 var target, chosenFiles;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -63,29 +58,29 @@ var Input = function (props) {
             }); } })));
 };
 Input.propTypes = {
-    className: prop_types_1.default.string,
-    labelClassName: prop_types_1.default.string,
-    labelWithFilesClassName: prop_types_1.default.string,
-    style: prop_types_1.default.object,
-    labelStyle: prop_types_1.default.object,
-    labelWithFilesStyle: prop_types_1.default.object,
-    getFilesFromEvent: prop_types_1.default.func.isRequired,
-    accept: prop_types_1.default.string.isRequired,
-    multiple: prop_types_1.default.bool.isRequired,
-    disabled: prop_types_1.default.bool.isRequired,
-    content: prop_types_1.default.node,
-    withFilesContent: prop_types_1.default.node,
-    onFiles: prop_types_1.default.func.isRequired,
-    files: prop_types_1.default.arrayOf(prop_types_1.default.any).isRequired,
-    extra: prop_types_1.default.shape({
-        active: prop_types_1.default.bool.isRequired,
-        reject: prop_types_1.default.bool.isRequired,
-        dragged: prop_types_1.default.arrayOf(prop_types_1.default.any).isRequired,
-        accept: prop_types_1.default.string.isRequired,
-        multiple: prop_types_1.default.bool.isRequired,
-        minSizeBytes: prop_types_1.default.number.isRequired,
-        maxSizeBytes: prop_types_1.default.number.isRequired,
-        maxFiles: prop_types_1.default.number.isRequired,
+    className: PropTypes.string,
+    labelClassName: PropTypes.string,
+    labelWithFilesClassName: PropTypes.string,
+    style: PropTypes.object,
+    labelStyle: PropTypes.object,
+    labelWithFilesStyle: PropTypes.object,
+    getFilesFromEvent: PropTypes.func.isRequired,
+    accept: PropTypes.string.isRequired,
+    multiple: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    content: PropTypes.node,
+    withFilesContent: PropTypes.node,
+    onFiles: PropTypes.func.isRequired,
+    files: PropTypes.arrayOf(PropTypes.any).isRequired,
+    extra: PropTypes.shape({
+        active: PropTypes.bool.isRequired,
+        reject: PropTypes.bool.isRequired,
+        dragged: PropTypes.arrayOf(PropTypes.any).isRequired,
+        accept: PropTypes.string.isRequired,
+        multiple: PropTypes.bool.isRequired,
+        minSizeBytes: PropTypes.number.isRequired,
+        maxSizeBytes: PropTypes.number.isRequired,
+        maxFiles: PropTypes.number.isRequired,
     }).isRequired,
 };
-exports.default = Input;
+export default Input;
